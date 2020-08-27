@@ -12,7 +12,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/jroimartin/rpcmq"
+	"github.com/loveason/rpcmq"
 )
 
 func main() {

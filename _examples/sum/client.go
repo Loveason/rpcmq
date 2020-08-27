@@ -10,7 +10,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/jroimartin/rpcmq"
+	"github.com/loveason/rpcmq"
 )
 
 const iter = 500
