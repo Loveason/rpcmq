@@ -93,17 +93,20 @@ func (c *Client) Init() error {
 }
 
 func (c *Client) setup() error {
-	err := c.ac.channel.ExchangeDeclare(
-		c.exchangeName, // name
-		c.exchangeKind, // kind
-		true,           // durable
-		false,          // autoDelete
-		false,          // internal
-		false,          // noWait
-		nil,            // args
-	)
-	if err != nil {
-		return fmt.Errorf("ExchangeDeclare: %v", err)
+	var err error
+	if c.exchangeName != "" {
+		err = c.ac.channel.ExchangeDeclare(
+			c.exchangeName, // name
+			c.exchangeKind, // kind
+			true,           // durable
+			false,          // autoDelete
+			false,          // internal
+			false,          // noWait
+			nil,            // args
+		)
+		if err != nil {
+			return fmt.Errorf("ExchangeDeclare: %v", err)
+		}
 	}
 
 	if c.exchangeKind != "fanout" {

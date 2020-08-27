@@ -100,17 +100,19 @@ func (s *Server) setup() error {
 	}
 	s.parallelMethods = make(chan bool, s.Parallel)
 
-	err = s.ac.channel.ExchangeDeclare(
-		s.exchangeName, // name
-		s.exchangeKind, // kind
-		true,           // durable
-		false,          // autoDelete
-		false,          // internal
-		false,          // noWait
-		nil,            // args
-	)
-	if err != nil {
-		return fmt.Errorf("ExchangeDeclare: %v", err)
+	if s.exchangeName != "" {
+		err = s.ac.channel.ExchangeDeclare(
+			s.exchangeName, // name
+			s.exchangeKind, // kind
+			true,           // durable
+			false,          // autoDelete
+			false,          // internal
+			false,          // noWait
+			nil,            // args
+		)
+		if err != nil {
+			return fmt.Errorf("ExchangeDeclare: %v", err)
+		}
 	}
 
 	durable, autoDelete := true, false
