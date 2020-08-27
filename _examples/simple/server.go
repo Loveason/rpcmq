@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/jroimartin/rpcmq"
+	"github.com/loveason/rpcmq"
 )
 
 func main() {
