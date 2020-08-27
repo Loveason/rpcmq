@@ -1,4 +1,4 @@
-module rpcmq
+module github.com/loveason/rpcmq
 
 go 1.13
 
