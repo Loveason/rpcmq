@@ -134,15 +134,17 @@ func (s *Server) setup() error {
 		return fmt.Errorf("QueueDeclare: %v", err)
 	}
 
-	err = s.ac.channel.QueueBind(
-		s.msgsQueue.Name, // name
-		s.msgsQueue.Name, // key
-		s.exchangeName,   // exchange
-		false,            // noWait
-		nil,              // args
-	)
-	if err != nil {
-		return fmt.Errorf("QueueBind: %v", err)
+	if s.exchangeName != "" {
+		err = s.ac.channel.QueueBind(
+			s.msgsQueue.Name, // name
+			s.msgsQueue.Name, // key
+			s.exchangeName,   // exchange
+			false,            // noWait
+			nil,              // args
+		)
+		if err != nil {
+			return fmt.Errorf("QueueBind: %v", err)
+		}
 	}
 
 	s.ac.consumerTag, err = uuid()

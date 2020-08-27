@@ -123,15 +123,17 @@ func (c *Client) setup() error {
 			return fmt.Errorf("QueueDeclare: %v", err)
 		}
 
-		err = c.ac.channel.QueueBind(
-			c.msgsQueue.Name, // name
-			c.msgsQueue.Name, // key
-			c.exchangeName,   // exchange
-			false,            // noWait
-			nil,              // args
-		)
-		if err != nil {
-			return fmt.Errorf("QueueBind: %v", err)
+		if c.exchangeName != "" {
+			err = c.ac.channel.QueueBind(
+				c.msgsQueue.Name, // name
+				c.msgsQueue.Name, // key
+				c.exchangeName,   // exchange
+				false,            // noWait
+				nil,              // args
+			)
+			if err != nil {
+				return fmt.Errorf("QueueBind: %v", err)
+			}
 		}
 	}
 
